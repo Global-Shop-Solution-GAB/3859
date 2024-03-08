@@ -1,0 +1,295 @@
+Program.Sub.ScreenSU.Start
+gui.F_Origin_Maint..create
+gui.F_Origin_Maint..caption("Origin of Sale Maintenance")
+gui.F_Origin_Maint..size(4545,2475)
+gui.F_Origin_Maint..position(0,0)
+gui.F_Origin_Maint..event(unload,f_origin_maint_unload)
+gui.F_Origin_Maint..alwaysontop(False)
+gui.F_Origin_Maint..fontname("Arial")
+gui.F_Origin_Maint..fontsize(8)
+gui.F_Origin_Maint..forecolor(0)
+gui.F_Origin_Maint..fontstyle(,,,,)
+gui.F_Origin_Maint..BackColor(-2147483633)
+gui.F_Origin_Maint..controlbox(True)
+gui.F_Origin_Maint..maxbutton(True)
+gui.F_Origin_Maint..minbutton(True)
+gui.F_Origin_Maint..mousepointer(0)
+gui.F_Origin_Maint..moveable(True)
+gui.F_Origin_Maint..sizeable(False)
+gui.F_Origin_Maint..ShowInTaskBar(True)
+gui.F_Origin_Maint..titlebar(True)
+gui.F_Origin_Maint.txt_ID.create(textbox,"",True,1215,300,0,200,400,True,0,Arial,8,-2147483643,1)
+gui.F_Origin_Maint.txt_Desc.create(textbox,"",True,3870,300,0,200,1000,True,0,Arial,8,-2147483643,1)
+gui.F_Origin_Maint.txt_Desc.maxLength(30)
+gui.F_Origin_Maint.cmd_New.create(button)
+gui.F_Origin_Maint.cmd_New.caption("New")
+gui.F_Origin_Maint.cmd_New.visible(True)
+gui.F_Origin_Maint.cmd_New.size(855,375)
+gui.F_Origin_Maint.cmd_New.zorder(0)
+gui.F_Origin_Maint.cmd_New.position(1200,1400)
+gui.F_Origin_Maint.cmd_New.enabled(True)
+gui.F_Origin_Maint.cmd_New.fontname("Arial")
+gui.F_Origin_Maint.cmd_New.fontsize(8)
+gui.F_Origin_Maint.cmd_New.event(click,cmd_new_click)
+gui.F_Origin_Maint.cmd_Save.create(button)
+gui.F_Origin_Maint.cmd_Save.caption("Save")
+gui.F_Origin_Maint.cmd_Save.visible(True)
+gui.F_Origin_Maint.cmd_Save.size(855,375)
+gui.F_Origin_Maint.cmd_Save.zorder(0)
+gui.F_Origin_Maint.cmd_Save.position(200,1400)
+gui.F_Origin_Maint.cmd_Save.enabled(True)
+gui.F_Origin_Maint.cmd_Save.fontname("Arial")
+gui.F_Origin_Maint.cmd_Save.fontsize(8)
+gui.F_Origin_Maint.cmd_Save.event(click,cmd_save_click)
+gui.F_Origin_Maint.lbl1.create(label,"Origin of Sale ID",True,1935,255,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.F_Origin_Maint.lbl2.create(label,"Description",True,1935,255,1,200,800,True,0,Arial,8,-2147483633,0)
+gui.F_Origin_Maint.cmd_Delete.create(button)
+gui.F_Origin_Maint.cmd_Delete.caption("Delete")
+gui.F_Origin_Maint.cmd_Delete.visible(True)
+gui.F_Origin_Maint.cmd_Delete.size(885,375)
+gui.F_Origin_Maint.cmd_Delete.zorder(0)
+gui.F_Origin_Maint.cmd_Delete.position(2200,1400)
+gui.F_Origin_Maint.cmd_Delete.enabled(True)
+gui.F_Origin_Maint.cmd_Delete.fontname("Arial")
+gui.F_Origin_Maint.cmd_Delete.fontsize(8)
+gui.F_Origin_Maint.cmd_Delete.event(click,cmd_delete_click)
+gui.F_Origin_Maint.cmd_Clear.create(button)
+gui.F_Origin_Maint.cmd_Clear.caption("Clear")
+gui.F_Origin_Maint.cmd_Clear.visible(True)
+gui.F_Origin_Maint.cmd_Clear.size(855,375)
+gui.F_Origin_Maint.cmd_Clear.zorder(0)
+gui.F_Origin_Maint.cmd_Clear.position(3200,1400)
+gui.F_Origin_Maint.cmd_Clear.enabled(True)
+gui.F_Origin_Maint.cmd_Clear.fontname("Arial")
+gui.F_Origin_Maint.cmd_Clear.fontsize(8)
+gui.F_Origin_Maint.cmd_Clear.event(click,cmd_clear_click)
+gui.F_Origin_Maint.cmd_brw.create(button)
+gui.F_Origin_Maint.cmd_brw.caption("^")
+gui.F_Origin_Maint.cmd_brw.visible(True)
+gui.F_Origin_Maint.cmd_brw.size(330,300)
+gui.F_Origin_Maint.cmd_brw.zorder(0)
+gui.F_Origin_Maint.cmd_brw.position(1500,400)
+gui.F_Origin_Maint.cmd_brw.enabled(True)
+gui.F_Origin_Maint.cmd_brw.fontname("Arial")
+gui.F_Origin_Maint.cmd_brw.fontsize(8)
+gui.F_Origin_Maint.cmd_brw.event(click,cmd_brw_click)
+gui.F_Origin_Maint.txt_ID.tabstop(True)
+gui.F_Origin_Maint.txt_ID.tabindex(1)
+gui.F_Origin_Maint.cmd_brw.tabstop(True)
+gui.F_Origin_Maint.cmd_brw.tabindex(2)
+gui.F_Origin_Maint.txt_Desc.tabstop(True)
+gui.F_Origin_Maint.txt_Desc.tabindex(3)
+gui.F_Origin_Maint.cmd_Save.tabstop(True)
+gui.F_Origin_Maint.cmd_Save.tabindex(4)
+gui.F_Origin_Maint.cmd_New.tabstop(True)
+gui.F_Origin_Maint.cmd_New.tabindex(5)
+gui.F_Origin_Maint.cmd_Delete.tabstop(True)
+gui.F_Origin_Maint.cmd_Delete.tabindex(6)
+gui.F_Origin_Maint.cmd_Clear.tabstop(True)
+gui.F_Origin_Maint.cmd_Clear.tabindex(7)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.Intrinsic.Control.CallSub(Cmd_new_click)
+Gui.F_Origin_Maint.txt_ID.Locked(True)
+Gui.F_Origin_Maint..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_MAINT.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.f_origin_maint_unload.start
+F.Intrinsic.Control.SetErrorHandler("f_origin_maint_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!conX.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("f_origin_maint_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_MAINT.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.f_origin_maint_unload.end
+
+program.sub.cmd_new_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_new_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iID.Declare(Long)
+
+F.ODBC.Connection!conX.GetID("ATG_3859_SALE_ORIGIN","ID",True,V.Local.iID)
+F.Intrinsic.Control.If(V.Local.iID,<=,0)
+	V.Local.iID.Set(1)
+F.Intrinsic.Control.EndIf
+
+Gui.F_Origin_Maint.txt_ID.Text(V.Local.iID)
+Gui.F_Origin_Maint.txt_Desc.Text("")
+
+F.Intrinsic.Control.Label("cmd_new_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_MAINT.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_new_click.end
+
+program.sub.cmd_save_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_save_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iID.Declare(String)
+V.Local.sDesc.Declare(String)
+V.Local.sQuery.Declare(String)
+
+V.Local.iID.Set(V.Screen.F_Origin_Maint!txt_ID.Text)
+V.Local.sDesc.Set(V.Screen.F_Origin_Maint!txt_Desc.Text)
+
+F.Intrinsic.Control.If(V.Local.sDesc.Trim,<>,"")
+	F.Intrinsic.String.Concat("SELECT * FROM ATG_3859_SALE_ORIGIN WHERE ID = '",V.Local.iID,"'",V.Local.sQuery)
+	F.ODBC.Connection!conX.OpenLocalRecordsetRW("rst",V.Local.sQuery)
+	F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,=,True)
+		F.ODBC.conX!rst.AddNew
+	F.Intrinsic.Control.EndIf
+	'F.ODBC.conX!rst.Set!ID(V.Local.iID)
+	F.ODBC.conX!rst.Set!DESCRIPTION(V.Local.sDesc)
+	F.ODBC.conX!rst.Update
+	F.ODBC.conX!rst.Close
+
+	F.Intrinsic.UI.Msgbox("Origin of sale saved.")
+
+	F.Intrinsic.Control.CallSub(Cmd_new_click)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("Please enter a description before saving.")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_save_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_MAINT.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_save_click.end
+
+program.sub.cmd_delete_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_delete_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iID.Declare(Long)
+V.Local.sQuery.Declare(String)
+
+V.Local.iID.Set(V.Screen.F_Origin_Maint!txt_ID.Text)
+F.Intrinsic.String.Concat("DELETE FROM ATG_3859_SALE_ORIGIN WHERE ID = '",V.Local.iID,"'",V.Local.sQuery)
+F.ODBC.Connection!conX.Execute(V.Local.sQuery)
+F.Intrinsic.String.Concat("ID ",V.Local.iID," was deleted.",V.Local.sQuery)
+F.Intrinsic.UI.Msgbox(V.Local.sQuery)
+F.Intrinsic.Control.CallSub(Cmd_new_click)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_delete_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_MAINT.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_delete_click.end
+
+program.sub.cmd_clear_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_clear_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.CallSub(Cmd_new_click)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_clear_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_MAINT.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_clear_click.end
+
+program.sub.cmd_brw_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_brw_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+Variable.Local.sRet.Declare(String)
+Variable.Local.sTemp.Declare(String)
+Variable.Local.sTitles.Declare(String)
+Variable.Local.iWidths.Declare(Long)
+
+Function.Intrinsic.String.Split("Origin of Sale ID*!*Description","*!*",Variable.local.sTitles)
+Function.Intrinsic.String.Split("1500*!*3500","*!*",Variable.local.iWidths)
+Function.Intrinsic.UI.Browser("Select Origin of Sale",conx,"Select ID, Description from ATG_3859_SALE_ORIGIN order by ID",Variable.Local.sTitles,Variable.Local.iWidths,5000,5000,Variable.Local.sRet)
+Function.Intrinsic.Control.If(Variable.Local.sRet,"<>","***CANCEL***")
+	Function.Intrinsic.String.Split(Variable.Local.sRet,"*!*",Variable.Local.sRet)
+	Gui.F_Origin_Maint.txt_ID.Text(V.Local.sRet(0))
+	Gui.F_Origin_Maint.txt_Desc.Text(V.Local.sRet(1))
+Function.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_brw_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_MAINT.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_brw_click.end
+
+Program.Sub.Comments.Start
+${$0$}$ATG_SALE_ORIGIN_MAINT$}$SUPERVSR$}$6/19/2013
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$1 GAB script, ran from a custom menu item, will be a maintenance program that will be used to add and delete preset 'Origin of Sale' descriptions into a new custom table.
+The maintenance GAB script, when ran, will display a screen that includes:
+Two Text Boxes:
+-1 text box will store the Origin of Sale ID, this field will be locked, and auto generated id number that will increment each time a new record is added to the table.
+	-Browser will be included that will populate with all existing id's and descriptions found in the Origin Code Table
+-1 text box will store the Origin of Sale Description, that will allow up to 30 characters for the user to enter in a description for the unique id value.
+
+4 Command Buttons:
+-1 'New' command that will create a new id for a new Origin of Sale description.
+-1 'Save' Command that will Add the new records, or update existing records to the table.
+-1 'Delete' Command that will Delete an existing record from the table
+-1 'Clear command that will 'Clear' the screen fields.
+Program.Sub.Comments.End
+
