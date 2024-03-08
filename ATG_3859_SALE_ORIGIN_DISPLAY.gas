@@ -1,0 +1,252 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Intrinsic.Control.SelectCase(V.Caller.Hook)
+'Populate
+F.Intrinsic.Control.Case(11560)
+	F.Intrinsic.Control.CallSub(Format_hidden_field)
+'Order Number Selected
+F.Intrinsic.Control.Case(11565)
+	F.Intrinsic.Control.CallSub(Check_for_origin)
+'GAB-BTN-1 Click
+F.Intrinsic.Control.Case(11950)
+	F.Intrinsic.Control.CallSub(Launch_browser)
+'Post Save Hook
+F.Intrinsic.Control.Case(11872)
+	F.Intrinsic.Control.CallSub(Save)
+F.Intrinsic.Control.EndSelect
+
+F.ODBC.Connection!conX.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_DISPLAY.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.Format_Hidden_Field.Start
+F.Intrinsic.Control.SetErrorHandler("Format_Hidden_Field_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Variable.SetProperty("000154","PW",75)
+
+F.Intrinsic.Variable.SetProperty("GAB-LBL-1","PL",434)
+F.Intrinsic.Variable.SetProperty("GAB-LBL-1","PT",71)
+F.Intrinsic.Variable.SetProperty("GAB-LBL-1","PW",130)
+
+F.Intrinsic.Variable.SetProperty("GAB-BTN-1","PL",600)
+F.Intrinsic.Variable.SetProperty("GAB-BTN-1","PT",86)
+F.Intrinsic.Variable.SetProperty("GAB-BTN-1","PW",23)
+
+F.Intrinsic.Variable.SetProperty("GAB-TEXT-1","PL",434)
+F.Intrinsic.Variable.SetProperty("GAB-TEXT-1","PT",88)
+F.Intrinsic.Variable.SetProperty("GAB-TEXT-1","PW",160)
+
+V.Passed.GAB-LBL-1.Set("Origin of Sale")
+
+F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-LBL-1,"HIDE",0)
+F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-BTN-1,"HIDE",0)
+F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-TEXT-1,"HIDE",0)
+
+F.Intrinsic.Control.If(V.Caller.Switches,=,"O")
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-LBL-1,"LOCK",0)
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-BTN-1,"LOCK",0)
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-TEXT-1,"LOCK",0)
+F.Intrinsic.Control.ElseIf(V.Caller.Switches,=,"N")
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-LBL-1,"LOCK",0)
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-BTN-1,"LOCK",0)
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-TEXT-1,"LOCK",0)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-LBL-1,"LOCK",1)
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-BTN-1,"LOCK",1)
+	F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-TEXT-1,"LOCK",1)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Format_Hidden_Field_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_DISPLAY.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Format_Hidden_Field.End
+
+Program.Sub.Launch_Browser.Start
+F.Intrinsic.Control.SetErrorHandler("Launch_Browser_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+Variable.Local.sRet.Declare(String)
+Variable.Local.sTemp.Declare(String)
+Variable.Local.sTitles.Declare(String)
+Variable.Local.iWidths.Declare(Long)
+
+Function.Intrinsic.String.Split("Origin of Sale ID*!*Description","*!*",Variable.local.sTitles)
+Function.Intrinsic.String.Split("1500*!*3500","*!*",Variable.local.iWidths)
+Function.Intrinsic.UI.Browser("Select Origin of Sale",conx,"Select ID, Description from ATG_3859_SALE_ORIGIN order by ID",Variable.Local.sTitles,Variable.Local.iWidths,5000,5000,Variable.Local.sRet)
+Function.Intrinsic.Control.If(Variable.Local.sRet,"<>","***CANCEL***")
+	Function.Intrinsic.String.Split(Variable.Local.sRet,"*!*",Variable.Local.sRet)
+	V.Passed.GAB-TEXT-1.Set(V.Local.sRet(1))
+	V.Passed.GAB-TEXT-3.Set(V.Local.sRet(0))
+Function.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Launch_Browser_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_DISPLAY.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Launch_Browser.End
+
+Program.Sub.Check_For_Origin.Start
+F.Intrinsic.Control.SetErrorHandler("Check_For_Origin_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sQuery.Declare(String)
+V.Local.sOrder.Declare(String)
+
+V.Local.sOrder.Set(V.Passed.000003)
+F.Intrinsic.String.LPad(V.Local.sOrder,"0",7,V.Local.sOrder)
+F.Intrinsic.String.Concat("SELECT * FROM ATG_3859_OE_SLE_ORGN WHERE ORDER_NO = '",V.Local.sOrder,"'",V.Local.sQuery)
+F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sQuery)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,=,False)
+	V.Passed.GAB-TEXT-1.Set(V.ODBC.conX!rst.FieldValTrim!ORIGIN_DESC)
+	V.Passed.GAB-TEXT-3.Set(V.ODBC.conX!rst.FieldValTrim!ORIGIN_ID)
+F.Intrinsic.Control.Else
+	V.Passed.GAB-TEXT-1.Set("")
+	V.Passed.GAB-TEXT-3.Set("")
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Check_For_Origin_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_DISPLAY.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Check_For_Origin.End
+
+Program.Sub.Save.Start
+F.Intrinsic.Control.SetErrorHandler("Save_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.sQuery.Declare(String)
+V.Local.sOrder.Declare(String)
+V.Local.sDesc.Declare(String)
+V.Local.iID.Declare(String)
+
+V.Local.sOrder.Set(V.Passed.000003)
+F.Intrinsic.Control.If(V.Local.sOrder,<>,"")
+	F.Intrinsic.String.LPad(V.Local.sOrder,"0",7,V.Local.sOrder)
+	V.Local.iID.Set(V.Passed.GAB-TEXT-3)
+	V.Local.sDesc.Set(V.Passed.GAB-TEXT-1)
+	F.Intrinsic.String.Concat("SELECT * FROM ATG_3859_OE_SLE_ORGN WHERE ORDER_NO = '",V.Local.sOrder,"'",V.Local.sQuery)
+	F.ODBC.Connection!conX.OpenLocalRecordsetRW("rst",V.Local.sQuery)
+	F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,=,True)
+		F.ODBC.conX!rst.AddNew
+	F.Intrinsic.Control.EndIf
+	F.ODBC.conX!rst.Set!ORDER_NO(V.Local.sOrder)
+	F.ODBC.conX!rst.Set!ORIGIN_ID(V.Local.iID.Long)
+	F.ODBC.conX!rst.Set!ORIGIN_DESC(V.Local.sDesc)
+	F.ODBC.conX!rst.Update
+	F.ODBC.conX!rst.Close
+	V.Passed.GAB-TEXT-1.Set("")
+	V.Passed.GAB-TEXT-3.Set("")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Save_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: ATG_3859_SALE_ORIGIN_DISPLAY.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Save.End
+
+Program.Sub.Comments.Start
+${$0$}$ATG_SALE_ORIGIN_DISPLAY$}$SUPERVSR$}$6/19/2013$}$False
+${$1$}$$}$$}$4$}$11565$}$OES0200A-ORDER-SELECTED-HOOK$}$6/19/2013 11:10:08 AM$}$Order number Selected hook
+
+${$1$}$$}$$}$3$}$11872$}$$}$5/30/2013 1:59:45 PM$}$Post Save Hook
+${$1$}$$}$$}$2$}$11950$}$$}$5/30/2013 1:59:36 PM$}$GAB-BTN-1 Hook
+${$1$}$$}$$}$0$}$11560$}$$}$5/30/2013 1:58:52 PM$}$Populate Hook
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Description: A new field will be made available on the Order Entry Screen, Order Entry>File>Sales Orders>Open, New, and Delete, that will represent the 'Origin of Sale'. This new field will be stored by each Order Number into a custom table.
+
+Hidden Fields used:
+LBL-GAB-1
+GAB-TEXT-1
+GAB-BTN-1
+
+Passed ID for order number is 000003
+
+1 GAB script, ran from a custom menu item, will be a maintenance program that will be used to add and delete preset 'Origin of Sale' descriptions into a new custom table.
+The maintenance GAB script, when ran, will display a screen that includes:
+Two Text Boxes:
+-1 text box will store the Origin of Sale ID, this field will be locked, and auto generated id number that will increment each time a new record is added to the table.
+	-Browser will be included that will populate with all existing id's and descriptions found in the Origin Code Table
+-1 text box will store the Origin of Sale Description, that will allow up to 30 characters for the user to enter in a description for the unique id value.
+
+4 Command Buttons:
+-1 'New' command that will create a new id for a new Origin of Sale description.
+-1 'Save' Command that will Add the new records, or update existing records to the table.
+-1 'Delete' Command that will Delete an existing record from the table
+-1 'Clear command that will 'Clear' the screen fields.
+
+1 GAB script will unhide the hidden fields, populate existing origin of sale records that are attached to an existing order, save the Origin of Sale information to the new custom table when the save post hook is fired, and populate the GAB-BTN-1 with a browser that will contain the Origin of Sale codes that the user is allowed to select from.
+
+Unhide and display new fields:
+The location of the Hidden fields will be placed at the upper portion of the screen, to the right of the Shipping Hold flag.
+
+Use function Function.Intrinsic.Variable.SetProperty
+Relative Screen Positions for hidden fields:
+LBL-GAB-1 425 x 73
+GAB-TXT-1 425 x 86
+GAB-BTN-1 570 x 86
+
+Unhide, and unlock all hidden controls using Function.Intrinsic.UI.ChangeCallerProperty
+
+Change the text of the LBL-GAB-1 to read 'Origin of Sale'
+
+Script will fire on hook 11950 GAB-BTN-1 Hook, this will allow for a browser to appear when the button is clicked.  The browser will contain the Origin Sale ID value and the Origin of Sale description. The browser information will be populated with the preset Origin of Sale ID and description established through the maintenance program.
+When an existing record has been selected from the browser, it will be populated into the new field.  The description selected will be populated into the new field only.
+
+Script will fire on Hook 11931 Order number Change hook, when hook is fired use GAB to query the table that will be used to store the Order Number and the associated Origin of Sale description.  The passed variable that stores the Order Number to be used is 000003. When a record is found for the selected order, populate the description value returned into the newly added field.
+
+Script will fire on hook 11872 Post Save Hook.  This hook, when fired will allow the information entered into the new field to be saved into the new custom table.  The custom table will include fields for the Order Number and the Origin of Sale Description.  The Order Number will be within the passed variable, 000003, and the Origin of Sale value will be in the passed variable, GAB-TXT-1. This information will need to be saved or updated to the table.
+
+NOTE:  Only allow the editing capabilities of this field on the New, and Open flags.  When viewing Orders in Delete, and View mode the fields will be locked and cannot be changed, only viewed.
+Program.Sub.Comments.End
+
